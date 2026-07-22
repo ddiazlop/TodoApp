@@ -102,11 +102,6 @@ fetchTodos();
 <template>
   <div class="card bg-base-100 w-full max-w-lg shadow-xl">
     <div class="card-body">
-      <div class="text-center">
-        <h1 class="card-title justify-center text-3xl">Todo App</h1>
-        <p class="text-base-content/60 mt-1 text-sm">Stay organized, get things done.</p>
-      </div>
-
       <TodoForm @add="addTodo" />
 
       <TodoFilter :current-filter="filter" @update:current-filter="filter = $event" />

@@ -16,6 +16,10 @@ const todos = rows.map((t) => ({
 
 <Layout>
   <main class="mx-auto max-w-xl px-4 py-12">
+    <div class="text-center">
+      <h1 class="text-3xl font-bold">Todo App</h1>
+      <p class="text-base-content/60 mt-1 text-sm">Stay organized, get things done.</p>
+    </div>
     <TodoApp client:load initialTodos={todos} />
   </main>
 </Layout>
