@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# sqlite database
+local.db
+local.db-wal
+local.db-shm
+
+# openclaude
+.openclaude/
