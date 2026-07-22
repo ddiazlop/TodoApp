@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TodoApp from "../components/TodoApp.vue";
+import { db } from "../../db";
+import { Todo } from "../../db/schema";
+import { asc } from "drizzle-orm";
+
+const rows = await db.select().from(Todo).orderBy(asc(Todo.createdAt));
+const todos = rows.map((t) => ({
+  id: t.id,
+  text: t.text,
+  completed: t.completed,
+  createdAt: t.createdAt,
+}));
+---
+
+<Layout>
+  <main class="mx-auto max-w-xl px-4 py-12">
+    <TodoApp client:load initialTodos={todos} />
+  </main>
+</Layout>
