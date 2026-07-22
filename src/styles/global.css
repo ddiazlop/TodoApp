@@ -1,2 +1,142 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@theme {
+  --color-brand-50: #fef3f2;
+  --color-brand-100: #fee4e2;
+  --color-brand-200: #ffcdc9;
+  --color-brand-300: #fda8a0;
+  --color-brand-400: #f97a6d;
+  --color-brand-500: #f04b3a;
+  --color-brand-600: #de3020;
+  --color-brand-700: #bb2316;
+  --color-brand-800: #9b2117;
+  --color-brand-900: #80211a;
+
+  --color-accent-50: #eff8ff;
+  --color-accent-100: #dbeffe;
+  --color-accent-200: #bfe2fe;
+  --color-accent-300: #93cffd;
+  --color-accent-400: #60b3fa;
+  --color-accent-500: #3b92f5;
+  --color-accent-600: #2574ea;
+  --color-accent-700: #1d60d7;
+  --color-accent-800: #1e4eae;
+  --color-accent-900: #1e4489;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-brand-500), var(--color-accent-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Blog post card */
+.post-card {
+  @apply rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm transition-all duration-300;
+}
+
+.post-card:hover {
+  @apply -translate-y-1 shadow-lg;
+  border-color: var(--color-brand-300);
+}
+
+.post-card .card-accent {
+  height: 4px;
+  width: 48px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-brand-400), var(--color-accent-400));
+  margin-bottom: 1rem;
+}
+
+/* Blog post content (prose-like) */
+.post-content h1 {
+  @apply mb-4 mt-8 text-3xl font-bold;
+}
+
+.post-content h2 {
+  @apply mb-3 mt-6 text-2xl font-bold;
+}
+
+.post-content h3 {
+  @apply mb-2 mt-5 text-xl font-semibold;
+}
+
+.post-content p {
+  @apply mb-4 leading-relaxed;
+}
+
+.post-content ul,
+.post-content ol {
+  @apply mb-4 ml-6;
+}
+
+.post-content ul {
+  @apply list-disc;
+}
+
+.post-content ol {
+  @apply list-decimal;
+}
+
+.post-content li {
+  @apply mb-1;
+}
+
+.post-content pre {
+  @apply mb-4 overflow-x-auto rounded-xl bg-base-300 p-4 text-sm;
+}
+
+.post-content code {
+  @apply rounded-md bg-base-300 px-1.5 py-0.5 text-sm font-mono;
+}
+
+.post-content pre code {
+  @apply bg-transparent p-0;
+}
+
+.post-content a {
+  color: var(--color-accent-600);
+  @apply underline decoration-1 underline-offset-2;
+}
+
+.post-content a:hover {
+  color: var(--color-accent-700);
+}
+
+.post-content blockquote {
+  @apply mb-4 border-l-4 border-brand-400 pl-4 italic;
+}
+
+.post-content img {
+  @apply my-6 rounded-xl;
+}
+
+.post-content hr {
+  @apply my-8 border-base-300;
+}
+
+/* Tag pill */
+.tag-pill {
+  @apply inline-block rounded-full px-3 py-1 text-xs font-medium;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--color-brand-200) 60%, transparent), color-mix(in srgb, var(--color-accent-200) 60%, transparent));
+  color: var(--color-brand-800);
+}
+
+/* Nav link active state */
+.nav-link {
+  @apply relative font-medium transition-colors duration-200;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute -bottom-1 left-0 h-0.5 w-0 transition-all duration-200;
+  background: linear-gradient(90deg, var(--color-brand-400), var(--color-accent-400));
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  @apply w-full;
+}

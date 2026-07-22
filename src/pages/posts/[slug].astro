@@ -1,0 +1,44 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+
+const { slug } = Astro.params;
+
+const post = await getEntry("posts", slug);
+
+if (!post || post.data.draft) {
+  return new Response(null, { status: 404, statusText: "Not found" });
+}
+
+const { Content } = await render(post);
+---
+
+<Layout>
+  <article class="post-content">
+    <a href="/" class="mb-8 inline-flex items-center gap-1 text-sm text-base-content/50 hover:text-base-content">
+      &larr; Back to home
+    </a>
+
+    <header class="mb-8 not-prose">
+      <h1 class="mb-3 text-4xl font-bold">{post.data.title}</h1>
+      <div class="flex flex-wrap items-center gap-3 text-sm text-base-content/50">
+        <time datetime={post.data.date.toISOString()}>
+          {post.data.date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5">
+            {post.data.tags.map((tag) => (
+              <span class="tag-pill">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+
+    <Content />
+  </article>
+</Layout>
