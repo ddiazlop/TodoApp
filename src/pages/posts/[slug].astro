@@ -4,7 +4,7 @@ import { getEntry, render } from "astro:content";
 
 const { slug } = Astro.params;
 
-const post = await getEntry("posts", slug);
+const post = await getEntry("posts", slug!);
 
 if (!post || post.data.draft) {
   return new Response(null, { status: 404, statusText: "Not found" });
