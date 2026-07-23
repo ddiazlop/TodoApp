@@ -1,33 +1,20 @@
 ---
-import '../styles/global.css';
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Metadata from "../components/Metadata.astro";
+import "../styles/global.css";
 ---
 
 <!doctype html>
 <html lang="en" data-theme="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>tag.dev — Diego's Blog</title>
-  </head>
+  <Metadata />
   <body class="min-h-screen bg-base-200 font-sans antialiased">
-    <header class="border-b border-base-300 bg-base-100/80 backdrop-blur-sm">
-      <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
-        <a href="/" class="text-2xl font-bold gradient-text hover:opacity-80">tag.dev</a>
-        <nav class="flex items-center gap-6">
-          <a href="/" class="nav-link text-sm">Home</a>
-          <a href="/about" class="nav-link text-sm">About</a>
-        </nav>
-      </div>
-    </header>
+    <Header />
 
     <main class="mx-auto max-w-3xl px-4 py-12">
       <slot />
     </main>
 
-    <footer class="border-t border-base-300 py-8 text-center text-sm text-base-content/50">
-      <p>&copy; {new Date().getFullYear()} tag.dev — Built with Astro</p>
-    </footer>
+    <Footer />
   </body>
 </html>
