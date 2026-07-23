@@ -2,47 +2,56 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
-const posts = await getCollection("posts");
-const published = posts
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const published = (
+  await getCollection("posts", ({ data }) => {
+    return data.draft !== true;
+  })
+).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Layout>
   <div class="mb-10 text-center">
     <h1 class="gradient-text text-4xl font-bold">tag.dev</h1>
-    <p class="mt-2 text-base-content/60">Thoughts on code, design, and everything in between.</p>
+    <p class="mt-2 text-base-content/60">
+      Thoughts on code, design, and everything in between.
+    </p>
   </div>
 
   <div class="space-y-6">
-    {published.length === 0 && (
-      <div class="rounded-2xl border border-base-300 bg-base-100 p-8 text-center">
-        <p class="text-base-content/50">No posts yet. Stay tuned!</p>
-      </div>
-    )}
-
-    {published.map((post) => (
-      <a href={`/posts/${post.id}`} class="post-card block">
-        <div class="card-accent"></div>
-        <h2 class="mb-2 text-xl font-bold">{post.data.title}</h2>
-        <p class="mb-4 text-sm text-base-content/60">{post.data.description}</p>
-        <div class="flex items-center justify-between">
-          <span class="text-xs text-base-content/40">
-            {post.data.date.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </span>
-          {post.data.tags && post.data.tags.length > 0 && (
-            <div class="flex flex-wrap gap-1.5">
-              {post.data.tags.map((tag) => (
-                <span class="tag-pill">{tag}</span>
-              ))}
-            </div>
-          )}
+    {
+      published.length === 0 && (
+        <div class="rounded-2xl border border-base-300 bg-base-100 p-8 text-center">
+          <p class="text-base-content/50">No posts yet. Stay tuned!</p>
         </div>
-      </a>
-    ))}
+      )
+    }
+
+    {
+      published.map((post) => (
+        <a href={`/posts/${post.id}`} class="post-card block">
+          <div class="card-accent" />
+          <h2 class="mb-2 text-xl font-bold">{post.data.title}</h2>
+          <p class="mb-4 text-sm text-base-content/60">
+            {post.data.description}
+          </p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-base-content/40">
+              {post.data.date.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-1.5">
+                {post.data.tags.map((tag) => (
+                  <span class="tag-pill">{tag}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </a>
+      ))
+    }
   </div>
 </Layout>
